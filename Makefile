@@ -1,6 +1,6 @@
 MKFILE_PATH := $(abspath $(dir $(firstword $(MAKEFILE_LIST))))
 
-PATH_TO_EMCC=path/to/emcc
+PATH_TO_EMCC= /home/rsinnema/emsdk/upstream/emscripten/emcc
 HEADER_FILES = canvas.h ChartJS_handler.h html_canvas.h simulation.h statistics_handler.h subject.h
 SOURCE_FILES = ChartJS_handler.cpp html_canvas.cpp main.cpp simulation.cpp subject.cpp
 
@@ -33,8 +33,8 @@ copydeps:
 
 run-debug: debug-build
 	@echo "Staring test server with debug ready code... (you can stop the server by pressing ctrl+C)"
-	@cd $(OUTPUT_PATH) && python3 -m http.server
+	@cd $(OUTPUT_PATH) && python -m http.server
 
 run-production: prod-build
 	@echo "Staring test server with production code... (you can stop the server by pressing ctrl+C)"
-	@cd $(OUTPUT_PATH) && python3 -m http.server
+	@cd $(OUTPUT_PATH) && python -m http.server

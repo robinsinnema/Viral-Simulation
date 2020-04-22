@@ -20,6 +20,9 @@
 #include <math.h>
 #include "html_canvas.h"
 #include "ChartJS_handler.h"
+#include "MovementStrategy.h"
+#include "LockdownMovementStrategy.h"
+#include "RegularMovementStrategy.h"
 
 //Constants to control the simulation
 const int SUBJECT_COUNT = 200;
