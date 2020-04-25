@@ -30,6 +30,11 @@ void Simulation::add_subject(Subject&& s)
     this->_subjects.emplace_back(std::move(s));
 }
 
+std::vector<Subject>& Simulation::getSubjects()
+{
+    return _subjects;
+}
+
 void Simulation::run()
 {
     if(running)

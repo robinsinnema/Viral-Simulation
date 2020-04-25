@@ -51,7 +51,17 @@ int main() {
 
         su.set_dx(dist_dx(mt));
         su.set_dy(dist_dy(mt));
-        su.selectStrategy(new corsim::LockdownMovementStrategy);
+
+        // SET EVERYONE TO THE REGULAR MOVEMENT STRATEGY
+        su.selectStrategy(new corsim::RegularMovementStrategy);
+
+        // SET 75% TO BE IN THE LOCKDOWN STRATEGY
+        std::vector<corsim::Subject> &subjects = s.getSubjects();
+        double size = subjects.size() * 0.75;
+        for (int i = 0; i < size; i++)
+        {
+            subjects.at(i).selectStrategy(new corsim::LockdownMovementStrategy);   
+        }
 
         if(i == SUBJECT_COUNT-1)
         {
