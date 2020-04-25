@@ -3,13 +3,9 @@
 namespace corsim
 {
 
-LockdownMovementStrategy::LockdownMovementStrategy()
+double LockdownMovementStrategy::setSpeed() 
 {
-    this->speed(0);
-}
-
-void LockdownMovementStrategy::speed(int speed) {
-    this->speed = speed;
+    return 0;
 }
 
 }

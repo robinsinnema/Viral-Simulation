@@ -51,6 +51,7 @@ int main() {
 
         su.set_dx(dist_dx(mt));
         su.set_dy(dist_dy(mt));
+        su.selectStrategy(new corsim::LockdownMovementStrategy);
 
         if(i == SUBJECT_COUNT-1)
         {
@@ -61,4 +62,6 @@ int main() {
     }  
 
     s.run();
+
 }
+

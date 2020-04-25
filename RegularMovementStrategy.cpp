@@ -3,15 +3,9 @@
 namespace corsim
 {
 
-RegularMovementStrategy::RegularMovementStrategy()
+double RegularMovementStrategy::setSpeed()\
 {
-    this->speed(10);
+    return 3.33;
 }
-
-void RegularMovementStrategy::speed(int speed){
-    this->speed = speed;
-}
-
-
 
 }

@@ -34,6 +34,7 @@ class Simulation
 {
     public:
         Simulation(int width, int height, std::unique_ptr<Canvas> canvas, std::unique_ptr<StatisticsHandler> sh);
+        std::vector<Subject>& getSubjects();
         void add_subject(Subject&& s);
         void run(); //This method starts the simulation but locks execution because theading is not supported in WASM
     private:

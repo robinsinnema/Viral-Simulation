@@ -93,4 +93,9 @@ double Subject::speed()
     return sqrt(_dx * _dx + _dy * _dy);
 }
 
+void Subject::selectStrategy(MovementStrategy *strategy){
+    delete this->strategy_;
+    this->strategy_ = strategy;
+}
+
 }

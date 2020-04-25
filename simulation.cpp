@@ -61,6 +61,9 @@ void Simulation::tick()
         collision_checker.emplace_back(&s);
 
         wall_collision(s);
+
+        s.set_x(s.x() + s.dx() * s.strategy_->setSpeed());
+        s.set_y(s.y() + s.dy() * s.strategy_->setSpeed()); 
     }
 
     for(int i = collision_checker.size()-1; i < collision_checker.size(); i--)
@@ -78,8 +81,11 @@ void Simulation::tick()
 
     for(Subject& s : _subjects)
     {
-        s.set_x(s.x() + s.dx() * dt);
-        s.set_y(s.y() + s.dy() * dt);
+        //s.set_x(s.x() + s.dx() * dt);
+        //s.set_y(s.y() + s.dy() * dt);
+
+        s.set_x(s.x() + s.dx() * s.strategy_->setSpeed());
+        s.set_y(s.y() + s.dy() * s.strategy_->setSpeed()); 
 
         if(s.infected())
         {

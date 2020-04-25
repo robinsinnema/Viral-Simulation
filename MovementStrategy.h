@@ -1,13 +1,14 @@
+#pragma once 
+
 namespace corsim
 {
 
 class MovementStrategy
 {
     public:
-        MovementStrategy();
-        virtual void speed(int speed) = 0;
-    private:
-
+        MovementStrategy() = default;
+        virtual ~MovementStrategy() = default;
+        virtual double setSpeed() = 0;
 };
 
-};
+}
