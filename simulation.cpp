@@ -69,6 +69,8 @@ void Simulation::tick()
 
         s.set_x(s.x() + s.dx() * s.strategy_->setSpeed());
         s.set_y(s.y() + s.dy() * s.strategy_->setSpeed()); 
+
+
     }
 
     for(int i = collision_checker.size()-1; i < collision_checker.size(); i--)
@@ -86,16 +88,25 @@ void Simulation::tick()
 
     for(Subject& s : _subjects)
     {
-        //s.set_x(s.x() + s.dx() * dt);
-        //s.set_y(s.y() + s.dy() * dt);
-
         s.set_x(s.x() + s.dx() * s.strategy_->setSpeed());
         s.set_y(s.y() + s.dy() * s.strategy_->setSpeed()); 
 
         if(s.infected())
         {
             numberInfected++;
+            s.addHourInfected();
         }
+
+        if(s.hoursInfected() > 300)
+        {
+            s.Cure();
+        }
+
+        if (s.infected() == true && s.isImmune() == true)
+        {
+            s.addHourImmune();
+        }
+
     }
 
     if(counter % 30 == 0)
@@ -163,10 +174,12 @@ void Simulation::subject_collision(Subject& s1, Subject& s2)
 
     if(dist < s1.radius() + s2.radius())
     {
-        if(s1.infected() || s2.infected())
+        if(s1.infected() && s1.isImmune() == false && s1.hoursImmune() > 5 || s2.infected() && s2.isImmune() == false && s2.hoursImmune() > 5)
         {
             s1.infect();
+            s1.setBeenInfected();
             s2.infect();
+            s2.setBeenInfected();
         }        
 
         double theta1 = s1.angle();

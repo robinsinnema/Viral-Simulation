@@ -98,4 +98,47 @@ void Subject::selectStrategy(MovementStrategy *strategy){
     this->strategy_ = strategy;
 }
 
+void Subject::setBeenInfected()
+{
+    this->_hasBeenInfected = true;
+}
+
+bool Subject::hasBeenInfected()
+{
+    return _hasBeenInfected;
+}
+
+int Subject::hoursInfected()
+{
+    return _hoursInfected;
+}
+
+void Subject::addHourInfected()
+{
+    this->_hoursInfected++;
+}
+
+int Subject::hoursImmune()
+{
+    return _hoursImmune;
+}
+
+void Subject::addHourImmune()
+{
+    this->_hoursImmune++;
+}
+
+void Subject::Cure()
+{
+    this->_infected = false;
+    this->_isImmune = true;
+    this->_hoursInfected = 0;
+    this->_hoursImmune = 0;
+}
+
+bool Subject::isImmune()
+{
+    return this->_isImmune;
+}
+
 }
