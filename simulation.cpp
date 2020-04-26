@@ -94,18 +94,23 @@ void Simulation::tick()
         if(s.infected())
         {
             numberInfected++;
-            s.addHourInfected();
+            s.addDayInfected();
         }
 
-        if(s.hoursInfected() > 300)
+        if(s.daysInfected() > 300)
         {
-            s.Cure();
+            s.cure();
         }
 
-        if (s.infected() == true && s.isImmune() == true)
+        if (s.hasBeenInfected() && s.isImmune())
         {
-            s.addHourImmune();
+            s.addDayImmune();
         }
+
+        if(s.daysImmune() > 135)
+        {
+            s.notImmune();
+        } 
 
     }
 
@@ -174,13 +179,16 @@ void Simulation::subject_collision(Subject& s1, Subject& s2)
 
     if(dist < s1.radius() + s2.radius())
     {
-        if(s1.infected() && s1.isImmune() == false && s1.hoursImmune() > 5 || s2.infected() && s2.isImmune() == false && s2.hoursImmune() > 5)
+        if(s1.infected() || s2.infected())
         {
-            s1.infect();
-            s1.setBeenInfected();
-            s2.infect();
-            s2.setBeenInfected();
-        }        
+            if(!s1.isImmune() && !s2.isImmune())
+            {
+                s1.infect();
+                s1.setBeenInfected();
+                s2.infect();
+                s2.setBeenInfected();
+            }
+        }
 
         double theta1 = s1.angle();
         double theta2 = s2.angle();

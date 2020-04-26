@@ -45,19 +45,20 @@ class Subject
         MovementStrategy *strategy_ = nullptr;
         void setBeenInfected();
         bool hasBeenInfected();
-        int hoursInfected();
-        void addHourInfected();
-        int hoursImmune();
-        void addHourImmune();
-        void Cure();
+        int daysInfected();
+        void addDayInfected();
+        int daysImmune();
+        void notImmune();
+        void addDayImmune();
+        void cure();
         bool isImmune();
 
     private:
         double _x = 0,_y = 0, _dx = 0, _dy = 0;
         bool _infected = false;
         int _radius = 0;
-        int _hoursInfected = 0;
-        int _hoursImmune = 101;
+        int _daysInfected = 0;
+        int _daysImmune = 0;
         bool _isImmune = false;
         bool _hasBeenInfected = false;
 };

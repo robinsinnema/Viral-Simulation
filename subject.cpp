@@ -108,32 +108,37 @@ bool Subject::hasBeenInfected()
     return _hasBeenInfected;
 }
 
-int Subject::hoursInfected()
+int Subject::daysInfected()
 {
-    return _hoursInfected;
+    return _daysInfected;
 }
 
-void Subject::addHourInfected()
+void Subject::addDayInfected()
 {
-    this->_hoursInfected++;
+    this->_daysInfected++;
 }
 
-int Subject::hoursImmune()
+int Subject::daysImmune()
 {
-    return _hoursImmune;
+    return _daysImmune;
 }
 
-void Subject::addHourImmune()
+void Subject::addDayImmune()
 {
-    this->_hoursImmune++;
+    this->_daysImmune++;
 }
 
-void Subject::Cure()
+void Subject::notImmune()
+{
+    this->_isImmune = false;
+}
+
+void Subject::cure()
 {
     this->_infected = false;
     this->_isImmune = true;
-    this->_hoursInfected = 0;
-    this->_hoursImmune = 0;
+    this->_daysInfected = 0;
+    this->_daysImmune = 0;
 }
 
 bool Subject::isImmune()
