@@ -67,10 +67,9 @@ void Simulation::tick()
 
         wall_collision(s);
 
+        //SET SPEED ACCORDINGLY TO THE STRATEGY
         s.set_x(s.x() + s.dx() * s.strategy_->setSpeed());
         s.set_y(s.y() + s.dy() * s.strategy_->setSpeed()); 
-
-
     }
 
     for(int i = collision_checker.size()-1; i < collision_checker.size(); i--)
@@ -88,25 +87,30 @@ void Simulation::tick()
 
     for(Subject& s : _subjects)
     {
+        //SET SPEED ACCORDINGLY TO THE STRATEGY
         s.set_x(s.x() + s.dx() * s.strategy_->setSpeed());
         s.set_y(s.y() + s.dy() * s.strategy_->setSpeed()); 
 
+        //IF SUBJECT IS STILL INFECTED ADD DAY INFECTED
         if(s.infected())
         {
             numberInfected++;
             s.addDayInfected();
         }
 
+        //IF SUBJECT HAS BEEN INFECTED FOR 300 DAYS; CURE
         if(s.daysInfected() > 300)
         {
             s.cure();
         }
 
+        //ONLY IF A SUBJECT HAS BEEN INFECTED BEFORE CAN THEY BECOME IMMUNE TO THE VIRUS, ADD DAY OF IMMUNITY IF SUBJECTS ARE IMMUNE AND HAVE BEEN INFECTED WITH THE VIRUS BEFORE    
         if (s.hasBeenInfected() && s.isImmune())
         {
             s.addDayImmune();
         }
 
+        //IF A SUBJECT HAS BEEN IMMUNE FOR 135 DAYS THEY LOSE THEIR IMMUNITY
         if(s.daysImmune() > 135)
         {
             s.notImmune();
@@ -178,9 +182,11 @@ void Simulation::subject_collision(Subject& s1, Subject& s2)
     double dist = distance(s1, s2);
 
     if(dist < s1.radius() + s2.radius())
-    {
+    {   
+        //IF SUBJECT1 OR SUBJECT2 IS INFECTED
         if(s1.infected() || s2.infected())
         {
+            //IF SUBJECT1 AND SUBJECT2 IS NOT IMMUNE; INFECT BOTH AND SET THEY HAVE BEEN INFECTED TO TRUE
             if(!s1.isImmune() && !s2.isImmune())
             {
                 s1.infect();
